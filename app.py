@@ -1,0 +1,137 @@
+# for heroku
+from os import environ
+
+import sqlite3 as lite
+import sys
+
+from sqlalchemy import *
+
+from flask import Flask
+from flask import render_template, flash, redirect, request
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.login import (LoginManager, login_required, 
+					login_user, logout_user, current_user)
+
+app = Flask(__name__)
+
+WTF_CSRF_ENABLED = True
+app.secret_key='u_can_do_this'
+
+DATABASE_URL= 'postgres://ieenbbnixbzymg:hj-gOvHaZzt-j1omubQAfglW3m@ec2-54-225-201-25.compute-1.amazonaws.com:5432/d9k47r8f72smi'
+
+# IF it's heroku, try will work
+try:
+	app.config['SQLALCHEMY_DATABASE_URI'] = environ['HEROKU_POSTGRESQL_GOLD_URL']
+	db = SQLAlchemy(app)
+	SQLALCHEMY_DATABASE_URI = 'HEROKU_POSTGRESQL_GOLD_URL'
+
+# Otherwise use SQLite locally
+except KeyError:
+	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/info.db'
+	db = SQLAlchemy(app)
+	SQLALCHEMY_DATABASE_URI = 'sqlite:///db/info.db'
+print( "success connect to db ")
+
+# login manager
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(userid)
+
+from models import *
+from forms import *
+
+@app.route('/index', methods=["GET", "POST"])
+@app.route('/', methods=["GET", "POST"])
+def index():
+	# render the forms
+	register_form= RegisterForm()
+	login_form = LoginForm()
+
+	if request.method=='POST':
+		# registration
+		if register_form.validate_on_submit():
+
+			print('register_form validated')
+
+			# create a new user object
+			user = User(register_form.name.data, 
+						register_form.email.data, 
+						register_form.password.data)
+
+			user = User.query.filter_by(email=login_form.email.data).first()
+			if user:
+				flash("This email has already been registered")
+				return redirect( '/' )
+
+			# add user to db
+			db.session.add(user)
+			db.session.commit()
+
+			# login this new user
+			login_user(user)
+			print( "logged in user" )
+
+			return redirect('/home')
+
+		# logging in form validation
+		if login_form.validate_on_submit():
+
+			print('Attempt login')
+
+			#check for user in db
+			user = User.query.filter_by(email=login_form.email.data).first()
+			
+			# if the passwords match
+			if (user and login_form.password.data == user.password):
+				
+				# login the user
+				login_user(user)
+
+				print('logged in user: ')
+				print(current_user)
+
+				return redirect('/home')
+
+			# user is not in our db! turn him baaaack
+			elif not user:
+				flash('Wrong Email/Password Combination')
+				return redirect('/index')
+		
+		flash('All fields are required')
+		return redirect('/index')
+
+	return render_template('index.html',
+							title='Hello',
+							form=register_form,
+							login_form=login_form,
+							current_user=current_user)
+
+
+@app.route('/home', methods=["GET", "POST"])
+@login_required
+def home():
+	# render the forms
+	register_form = RegisterForm()
+	login_form = LoginForm()
+
+	return render_template( 'home.html',
+							title="Home",
+							form=register_form,
+							login_form=login_form,
+							current_user=current_user)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    flash("You are now logged out.")
+    return redirect('/')
+    
+# deals with unauthorized page access
+@login_manager.unauthorized_handler
+def unauthorized():
+    # do stuff
+    flash("You'll need to log in or sign up to access that page")
+    return redirect('/')

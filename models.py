@@ -1,0 +1,33 @@
+from app import db
+
+class User(db.Model):
+
+	"""The database for current users"""
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(30), unique=True)
+	email = db.Column(db.String(80), unique=True)
+	password = db.Column(db.String(80), unique=True)
+
+	def __init__(self, name, email, password):
+
+		print( "Generating user" )
+
+		self.name = name
+		self.email = email
+		self.password = password
+
+	def is_authenticated(self):
+		return True
+
+	def is_active(self):
+		return True
+
+	def is_anonymous(self):
+		return False
+
+	def get_id(self):
+		return str(self.id)
+
+	def __repr__(self):
+		return '<User %r>' % self.email
+

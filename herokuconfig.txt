@@ -1,0 +1,2 @@
+=== powerful-brook-3039 Config Vars
+DATABASE_URL: postgres://wrokgtzezvyaoy:k66XQj-dp5YxhRacDGsCBEWf6z@ec2-54-225-201-25.compute-1.amazonaws.com:5432/d60ac6t6c4ed5u

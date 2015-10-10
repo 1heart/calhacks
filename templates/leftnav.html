@@ -1,0 +1,20 @@
+{% extends "nav.html" %}
+
+{% block content %}
+
+<div class="container">
+<div class="leftnav">
+	
+	<ul>
+		<a href="/profile"><li class="profile">Profile</li></a>
+		<a href="/pay"><li>Make Payment</li></a>
+		<a href="/charge"><li>Charge</li></a>
+		<a href="/profile"><li>Visualize</li></a>
+		<a href="/profile"><li>Settings</li></a>
+	</ul>
+</div>
+
+{% block inner_content %}{% endblock %}
+
+</div>
+{% endblock %}
