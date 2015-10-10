@@ -16,3 +16,5 @@ var/
 *.spec
 venv/
 utput/
+*.pyc
+
