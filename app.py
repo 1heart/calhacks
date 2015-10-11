@@ -71,7 +71,7 @@ def index():
 			if existing_user:
 				flash("This email has already been registered")
 				return redirect( '/' )
-
+			user.make_wallet(user.password)
 			# add user to db
 			db.session.add(user)
 			db.session.commit()

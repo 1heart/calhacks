@@ -1,8 +1,8 @@
-from flask import request
+import requests
 from app import api_code 
 from app import db
 from blockchain import createwallet
-
+from IPython import embed
 
 import json
 
@@ -13,7 +13,7 @@ class User(db.Model):
 	name = db.Column(db.String(30), unique=True)
 	email = db.Column(db.String(80), unique=True)
 	password = db.Column(db.String(80), unique=True)
-	wallet_password = db.Column(db.String(80), unique=True); 
+	wallet_password = db.Column(db.String(80)); 
 
 
 	def __init__(self, name, email, password):
@@ -41,6 +41,7 @@ class User(db.Model):
 			data['email'] = email
 
 		headers = {'Content-Type':'application/x-www-form-urlencoded'}
+		
 		try:
 			requested = requests.post('https://blockchain.info/api/v2/create_wallet', data=data, headers=headers)
 			print("wallet successfully made")
@@ -51,7 +52,7 @@ class User(db.Model):
 			print(e)
 
 		print("wallet successfully made")
-		return json.dump(request)
+		return json.dumps(request.json())
 
 	def is_active(self):
 		return True
