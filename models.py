@@ -13,7 +13,10 @@ class User(db.Model):
 	name = db.Column(db.String(30), unique=True)
 	email = db.Column(db.String(80), unique=True)
 	password = db.Column(db.String(80), unique=True)
-	wallet_password = db.Column(db.String(80)); 
+	wallet_password = db.Column(db.String(80))
+	guid = db.Column(db.String(80)) 
+	link = db.Column(db.String(80)) 
+	address = db.Column(db.String(80)) 
 
 
 	def __init__(self, name, email, password):
@@ -43,7 +46,14 @@ class User(db.Model):
 		headers = {'Content-Type':'application/x-www-form-urlencoded'}
 		
 		try:
-			requested = requests.post('https://blockchain.info/api/v2/create_wallet', data=data, headers=headers)
+			requested = requests.post(
+				'https://blockchain.info/api/v2/create_wallet', 
+				data=data,
+				headers=headers)
+			request_dict = json.loads(requested.text)
+			self.guid = request_dict['guid']
+			self.address = request_dict['address']
+			self.link = request_dict['link']
 			print("wallet successfully made")
 			return json.dumps(requested.json())
 
