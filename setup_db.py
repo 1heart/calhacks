@@ -21,3 +21,10 @@ user1.payment_transactions.append(transaction)
 db.session.commit()
 
 db.session.query(User).first()
+
+alias1 = Alias("lol1alias", user1)
+alias2 = Alias("lol2alias", user1)
+
+db.session.add(alias1)
+db.session.add(alias2)
+db.session.commit()

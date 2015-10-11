@@ -148,8 +148,8 @@ class Alias(db.Model):
 
 	def __init__(self, alias_string, user):
 		self.alias_string = alias_string
-		user_id = user.id
-		talent = 0
+		self.user_id = user.id
+		self.points = 0
 		self.get_user().aliases.append(self)
 
 
