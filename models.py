@@ -111,6 +111,7 @@ class Transaction(db.Model):
 		self.description = description
 		self.receiver_address  = receiver_address
 		self.timestamp = time.time()
+		self.likes = 1
 
 	def get_payer(self):
 		return User.query.filter('id='+str(self.payer_id)).first()

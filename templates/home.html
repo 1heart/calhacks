@@ -1,6 +1,10 @@
 {% extends 'leftnav.html' %}
 
 {% block inner_content %}
+
+<script src="../static/home.js"></script>
+
+
 <div>
 	<h1>Hi, {{ current_user.name }}</h1>
 </div>
@@ -51,9 +55,9 @@
 					<h2>{{ transaction.payer_id }} just paid {{ transaction.receiver_id }} a monstrous {{ transaction.btc }} BTC.</h2>
 					<p>{{ transaction.description }}</p>
 				</div>
-				<div class="transaction-right">
-					<a class="likable"><i class="fa fa-heart"></i></a>
-					{% if transaction.likes %}<p class="likes">{{ transaction.likes }}</p>{% endif %}
+				<div class="transaction-right" onclick="sendLike(this)" data-transaction-id="{{ transaction.id }}">
+					<a class="likable"  ><i class="fa fa-heart"></i></a>
+					{% if transaction.likes %}<p class="likes" data-transaction-id="{{transaction.id}}" >{{ transaction.likes }}</p>{% endif %}
 
 					<p class="timestamp">{{ transaction.time }}</p>
 				</div>

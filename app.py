@@ -145,6 +145,22 @@ def pay():
 			return 'transaction failed'
 	return render_template( 'pay.html')
 
+transactionUserDict = {}
+
+@app.route('/vote', methods=['POST'])
+def vote():
+	if request.method == 'POST':
+		if request.form['transactionId']:
+			transactionId = request.form['transactionId']
+			if transactionId not in transactionUserDict:
+				transactionUserDict[transactionId] = []
+			if current_user in transactionUserDict[transactionId]:
+				return 'nah'
+			else:
+				transactionUserDict[transactionId].append(current_user)
+				return 'lol nice'
+
+
 @app.route('/aliases')
 def alias():
 	return json.dumps(map(lambda x: x.alias_string, Alias.query.all()))
