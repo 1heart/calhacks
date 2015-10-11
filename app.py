@@ -30,6 +30,7 @@ except KeyError:
 	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/info.db'
 	db = SQLAlchemy(app)
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///db/info.db'
+	print("using sqlite")
 print( "success connect to db ")
 
 # login manager
@@ -61,8 +62,8 @@ def index():
 						register_form.email.data, 
 						register_form.password.data)
 
-			user = User.query.filter_by(email=login_form.email.data).first()
-			if user:
+			existing_user = User.query.filter_by(email=login_form.email.data).first()
+			if existing_user:
 				flash("This email has already been registered")
 				return redirect( '/' )
 
