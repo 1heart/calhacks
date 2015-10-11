@@ -119,6 +119,10 @@ def index():
 def profile():
 	return render_template( 'profile.html')
 
+@app.route('/charge')
+def charge():
+	return render_template( 'charge.html')
+
 @app.route('/pay')
 def pay():
 	return render_template( 'pay.html')
@@ -135,8 +139,12 @@ def home():
 	register_form = RegisterForm()
 	login_form = LoginForm()
 
+	transaction_list = Transaction.query.all()
+	print(transaction_list)
+
 	return render_template( 'home.html',
 							title="Home",
+							transaction_list=transaction_list,
 							form=register_form,
 							login_form=login_form,
 							current_user=current_user)

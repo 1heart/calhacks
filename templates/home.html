@@ -53,7 +53,7 @@
 				</div>
 				<div class="transaction-right">
 					<a class="likable" href="/like"><i class="fa fa-heart"></i></a>
-					<p class="likes">{{ transaction.likes }}</p>
+					{% if transaction.likes %}<p class="likes">{{ transaction.likes }}</p>{% endif %}
 
 					<p class="timestamp">{{ transaction.timestamp }}</p>
 				</div>
