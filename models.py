@@ -33,6 +33,9 @@ class User(db.Model):
 	def receiving_transactions(self):
 		return Transaction.query.filter('receiver_id=' + str(self.id)).all()
 
+	def payment_transactions(self):
+			return Transaction.query.filter('payment_id=' + str(self.id)).all()
+
 	def __init__(self, name, password, email):
 
 		print( "Generating user" )
