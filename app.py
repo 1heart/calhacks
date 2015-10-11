@@ -18,6 +18,7 @@ WTF_CSRF_ENABLED = True
 app.secret_key='u_can_do_this'
 
 DATABASE_URL= 'postgres://ieenbbnixbzymg:hj-gOvHaZzt-j1omubQAfglW3m@ec2-54-225-201-25.compute-1.amazonaws.com:5432/d9k47r8f72smi'
+api_code = '9cb12b7c-e9bd-4bf8-b7ff-64b26d85a895'
 
 # IF it's heroku, try will work
 try:
