@@ -4,6 +4,8 @@ from app import db
 from blockchain import createwallet
 from IPython import embed
 
+import time
+
 import json
 
 class User(db.Model):
@@ -27,6 +29,8 @@ class User(db.Model):
 	# 							backref='receiver',
  #                                lazy='dynamic')
                                 # foreign_keys='User.id')
+	def receiving_transactions(self):
+		return Transaction.query.filter('receiver_id=' + str(self.id)).all()
 
 	def __init__(self, name, email, password):
 
@@ -89,20 +93,22 @@ class Transaction(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	amount = db.Column(db.Integer)
 
+	timestamp = db.Column(db.Integer)
+
 	payer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-	# receiver_id = db.Column(db.Integer, db.ForeignKey('receiver.id'))
+	receiver_id = db.Column(db.Integer)
 	
 	receiver_address = db.Column(db.String(240))
 	description = db.Column(db.String(240)) 
 
 
-	def __init__(self):#, payerUser, receiverUser, amount, description, receiver_address):
-		# self.payer_id = payerUser.id
-		# self.receiver_id = receiverUser.id
-		# self.amount = amount
-		# self.description = description
-		# self.receiver_address  = receiver_address
-		pass
-
+	def __init__(self, payerUser, receiverUser, amount, description, receiver_address):
+		self.payer_id = payerUser.id
+		self.receiver_id = receiverUser.id
+		self.amount = amount
+		self.description = description
+		self.receiver_address  = receiver_address
+		
+		self.timestamp = time.time()
 
 
