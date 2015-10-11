@@ -30,7 +30,7 @@ var AutoCompleteSelect = React.createClass({displayName: 'AutoCompleteSelect',
             	libraries[i] = <li className="dropdown-box" onClick={this.handleClick}>{libraries[i]}</li>
             }
 
-	        return 	<div><h1>Pay {this.state.currUser || ''}</h1><div className="input-search-wrapper">
+	        return 	<div><h1 id="highlightBlue">Pay {this.state.currUser || ''}</h1><div className="input-search-wrapper">
 				        <input type="text" className="input-search"value={this.state.searchString} onChange={this.handleChange} placeholder="Search here for recipient ID"/>
 				        <ul> 
 				        	{libraries}

@@ -150,6 +150,11 @@ input.center-input {
 	top: 0;
 	z-index: -10;
 }
+
+#highlightBlue {
+	color: #3d91ff;
+}
+
 .content h1 {
 	padding: 20px 20px 20px 24px;
 	font-weight: 300;
