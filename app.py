@@ -130,7 +130,8 @@ def pay():
 
 @app.route('/settings')
 def settings():
-	return render_template( 'settings.html')
+	return render_template( 'settings.html',
+							current_user=current_user)
 
 @app.route('/home', methods=["GET", "POST"])
 @login_required

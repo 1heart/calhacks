@@ -273,8 +273,8 @@ input.center-input {
 }
 /* Profile */
 .inline {
-	display: inline;
-	line-height: 50px;
+	display: inline-block;
+	margin-right:5px;
 }
 /* (Errors and successes) Banner */
 .banner {

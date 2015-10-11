@@ -5,4 +5,31 @@
 	<h1 class="inline">{{ current_user.name }}</h1><i class="fa fa-heart inline"></i><p class="inline">35</p>
 	<p></p>
 </div>
+
+{% if current_user.transactions %}
+<div>
+	<ul>
+	{% for transaction in current_user.transactions %}
+		<a href="/transaction">
+			<li class="transaction">
+				<div class="transaction-left">
+					<h2>{{ transaction.payer_id }} just paid {{ transaction.receiver_id }} a monstrous {{ transaction.amount }} BTC.</h2>
+					<p>{{ transaction.description }}</p>
+				</div>
+				<div class="transaction-right">
+					<a class="likable" href="/like"><i class="fa fa-heart"></i></a>
+					{% if transaction.likes %}<p class="likes">{{ transaction.likes }}</p>{% endif %}
+
+					<p class="timestamp">{{ transaction.timestamp }}</p>
+				</div>
+			</li>
+		</a>
+	{% endfor %}
+	</ul>
+</div>
+{% else %}
+<div class="noticebar">
+	<p>No more feed to show right now. Check back later for updates!</p>
+</div>
+{% endif %}
 {% endblock %}

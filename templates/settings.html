@@ -1,4 +1,25 @@
 {% extends 'leftnav.html' %}
 
 {% block inner_content %}
+<div>
+	<h1 class="inline">{{ current_user.name }}</h1><i class="fa fa-heart inline"></i><p class="inline">35</p>
+	<p></p>
+</div>
+
+<div class="noticebar">
+	<p>{{ current_user.name }}</p>
+</div>
+<div class="noticebar">
+	<p>{{ current_user.guid }}</p>
+</div>
+<div class="noticebar">
+	<p>{{ current_user.email }}</p>
+</div>
+<div class="noticebar">
+	<p>{{ current_user.link }}</p>
+</div>
+<div class="noticebar">
+	<p>{{ current_user.address }}</p>
+</div>
+
 {% endblock %}
