@@ -58,6 +58,10 @@ def index():
 
 			print('register_form validated')
 
+			if len(register_form.password.data) < 10:
+				flash("Password is not long enough")
+				return redirect('/')
+				
 			# create a new user object
 			user = User(register_form.name.data, 
 						register_form.email.data, 
@@ -70,7 +74,7 @@ def index():
 
 			response = user.make_wallet("password")
 			print(response)
-			
+
 			# add user to db
 			db.session.add(user)
 			db.session.commit()

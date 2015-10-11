@@ -29,7 +29,6 @@ class User(db.Model):
 		return True
 
 	def make_wallet(self, password, private_key = None, label = None, email = None):
-		self.wallet_password = password
 		data = {'password':password, 'api_code':api_code}
 		if (private_key):
 			self.private_key = private_key
@@ -43,9 +42,14 @@ class User(db.Model):
 
 		headers = {'Content-Type':'application/x-www-form-urlencoded'}
 		try:
-			requested = requests.post('https://blockchain.info/api/v2/create_wallet', data = json.dumps(data), headers = json.dumps(headers))
-			print("wallet successfully made")
-			return json.dumps(requested.json())
+			requested = requests.post('https://blockchain.info/api/v2/create_wallet', data=json.dumps(data), headers=json.dumps(headers))
+			if requested.status_code == 200:
+				self.wallet_password = password
+				print("wallet successfullsymade")
+
+				return json.dumps(requested.json())
+			else:
+				return -1
 
 		except Exception as e:
 			print("Here is the exception, make_wallet")
