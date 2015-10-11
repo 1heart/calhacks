@@ -143,6 +143,10 @@ def pay():
 			return 'transaction failed'
 	return render_template( 'pay.html')
 
+@app.route('/aliases')
+def alias():
+	return json.dumps(map(lambda x: x.alias_string, Alias.query.all()))
+
 
 @app.route('/settings')
 def settings():

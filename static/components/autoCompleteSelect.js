@@ -4,6 +4,14 @@ var AutoCompleteSelect = React.createClass({displayName: 'AutoCompleteSelect',
 		return { searchString: '' };
 	},
 
+	componentDidMount: function() {
+		$.getJSON('/aliases', function(result) {
+			if (this.isMounted()){
+				this.setState({items: result});
+			}
+		}.bind(this));
+	},
+
 	handleChange: function(e){
 
 		this.setState({searchString:e.target.value});
@@ -18,7 +26,7 @@ var AutoCompleteSelect = React.createClass({displayName: 'AutoCompleteSelect',
 
 	render: function() {
 
-		var libraries = this.props.items,
+		var libraries = this.state.items,
 		searchString = this.state.searchString.trim().toLowerCase();
 
 		if(searchString.length > 0){
