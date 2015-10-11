@@ -42,8 +42,12 @@ class User(db.Model):
 
 		headers = {'Content-Type':'application/x-www-form-urlencoded'}
 		try:
-			request = requests.post('https://blockchain.info/api/v2/create_wallet', data = json.dump(data), headers = json.dump(headers))
-		except requests.exceptions.RequestException as e:
+			requested = requests.post('https://blockchain.info/api/v2/create_wallet', data=data, headers=headers)
+			print("wallet successfully made")
+			return json.dumps(requested.json())
+
+		except Exception as e:
+			print("Here is the exception, make_wallet")
 			print(e)
 
 		print("wallet successfully made")
