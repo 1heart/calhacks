@@ -49,7 +49,6 @@
 <div>
 	<ul>
 	{% for transaction in transaction_list %}
-		<a href="/transaction">
 			<li class="transaction">
 				<div class="transaction-left">
 					<h2>{{ transaction.payer_id }} just paid {{ transaction.receiver_id }} a monstrous {{ transaction.btc }} BTC.</h2>
@@ -62,7 +61,6 @@
 					<p class="timestamp">{{ transaction.time }}</p>
 				</div>
 			</li>
-		</a>
 	{% endfor %}
 	</ul>
 </div>

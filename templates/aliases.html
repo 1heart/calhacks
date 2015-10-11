@@ -5,4 +5,21 @@
 	<h1>{{ current_user.name }}</h1>
 	<p></p>
 </div>
+
+
+{% if aliases %}
+	<ul>
+	{% for alias in aliases %}
+		<li>
+			<div class="noticebar">
+				<p class="inline">{{ alias.alias_string }}</p><div class="right"><i class="inline fa fa-heart"></i><p class="inline"> {{ alias.points }}</p></div>
+			</div>
+		</li>
+	{% endfor %}
+	</ul>
+{% endif %}
+<form method="post"
+<div class="input-search-wrapper">
+	<input class="input-search" type="text" placeholder="Add a new Alias"></input>
+</div>
 {% endblock %}

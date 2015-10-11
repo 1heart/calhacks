@@ -119,7 +119,13 @@ def index():
 
 @app.route('/profile')
 def profile():
-	return render_template( 'profile.html')
+	likes = 0
+	aliases = Alias.query.filter_by(user_id=current_user.id)
+	for alias in aliases:
+		likes = likes + alias.points
+	return render_template( 'profile.html',
+							likes=likes,
+							current_user=current_user)
 
 @app.route('/charge')
 def charge():
@@ -173,6 +179,21 @@ def alias():
 def settings():
 	return render_template( 'settings.html',
 							current_user=current_user)
+
+@app.route('/current_aliases')
+@login_required
+def current_aliases():
+	aliases = Alias.query.filter_by(user_id=current_user.id)
+
+	return render_template( 'aliases.html',
+							title="Aliases",
+							current_user=current_user,
+							aliases=aliases)
+
+
+
+
+
 
 @app.route('/home', methods=["GET", "POST"])
 @login_required
