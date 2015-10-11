@@ -15,6 +15,9 @@ a {
 	color: inherit;
 	text-decoration: none;
 }
+li {
+	list-style-type: none;
+}
 h1, h2, h3, h4 {
 	color: #3d91ff;
 }
@@ -109,6 +112,7 @@ input.center-input {
 	max-width: 900px;
 	margin: auto;
 	text-align: left;
+	height: 0;
 }
 .leftnav {
 	width: 200px;
@@ -134,24 +138,80 @@ input.center-input {
 	border-left: 3px solid #3d91ff;
 }
 .content {
+
+	border-left: 1px solid #e6e6e6;
+	border-top: 1px solid #e6e6e6;
 	display: inline-block;
-	height: 100vh;
-	margin: 80px 0px 0px 40px;
+	min-height: 100vh;
+	margin: 80px 0px 100px 40px;
 	width: 600px;
 	position: absolute;
 	top: 0;
 	z-index: -10;
 }
 .content h1 {
-	border-left: 1px solid #e6e6e6;
-	border-top: 1px solid #e6e6e6;
 	padding: 20px 20px 20px 24px;
 	font-weight: 300;
 	font-size: 36px;
-	min-height: 100vh;
 }
 
+/* transactionBars */
+.transaction {
+	border-top: 1px solid #e6e6e6;
+}
+.transaction-left {
+	width: 78%;
+	display: inline-block;
+	padding: 16px 0px 20px 24px;
+}
+.transaction-right {
+	width: 10%;
+	float: right;
+	height: 80%;
+	display: inline-block;
+	padding: 24px 0 0 0;
 
+}
+.transaction-left:hover {
+	border-left: 2px solid #3d91ff;
+	padding-left: 22px;
+
+}
+.transaction-right-bottom {
+	display: inline-block;
+	height: 10%;
+	width: 60px;
+	margin-right: -50px;
+	margin-left: 18px;
+}
+.transaction h2 {
+	font-weight: 300;
+	margin-bottom: 10px;
+}
+.transaction p {
+	line-height: 1.4;
+}
+.noticebar {
+	padding: 20px 20px 20px 24px;
+	border-top: 1px solid #e6e6e6;
+}
+.fa-heart {
+	color: inherit;
+	font-size: 18px;
+}
+.likable:hover {
+	color: red;
+}
+.fa-btc {
+	float: right;
+	margin-right: 10px;
+	line-height: 50px;
+	color: inherit;
+	font-size: 20px;
+}
+.timestamp {
+	font-size: 14px;
+}
 
 
 /* Left navigation bar */
@@ -161,7 +221,7 @@ input.center-input {
 }
 .wrapper {
 	/*min-width: 1000px;*/
-	min-height: 80vh;
+	/*min-height: 80vh;*/
 }
 .home-container {
 	max-width: 900px;
@@ -175,7 +235,11 @@ input.center-input {
 .header {
 	font-size: 56px;
 }
-
+/* Profile */
+.inline {
+	display: inline;
+	line-height: 50px;
+}
 /* (Errors and successes) Banner */
 .banner {
 	width: 95%;
@@ -245,4 +309,6 @@ ul.ul-nav li:hover{
 	text-align: center;
 	background-color: #e6e6e6;
 	line-height: 50px;
+	position: relative;
+	bottom: 0;
 }
