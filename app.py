@@ -12,6 +12,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import (LoginManager, login_required, 
 					login_user, logout_user, current_user)
 
+import datetime
+
 app = Flask(__name__)
 
 WTF_CSRF_ENABLED = True
@@ -161,6 +163,9 @@ def home():
 	login_form = LoginForm()
 
 	transaction_list = Transaction.query.all()
+	for x in transaction_list:
+		currDate = datetime.datetime.fromtimestamp(x.timestamp).strftime('%Y/%m/%d, %H:%M:%S')
+		x.time = currDate
 	print(transaction_list)
 
 	return render_template( 'home.html',

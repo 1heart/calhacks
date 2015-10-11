@@ -5,7 +5,7 @@
 	<h1>Hi, {{ current_user.name }}</h1>
 </div>
 
-<div>
+<!-- <div>
 	<ul>
 		<li class="transaction">
 			<a href="/transaction">
@@ -39,7 +39,7 @@
 			</div>
 		</li>
 	</ul>
-</div>
+</div> -->
 
 {% if transaction_list %}
 <div>
@@ -55,7 +55,7 @@
 					<a class="likable" href="/like"><i class="fa fa-heart"></i></a>
 					{% if transaction.likes %}<p class="likes">{{ transaction.likes }}</p>{% endif %}
 
-					<p class="timestamp">{{ transaction.timestamp }}</p>
+					<p class="timestamp">{{ transaction.time }}</p>
 				</div>
 			</li>
 		</a>
