@@ -107,6 +107,28 @@ input.center-input {
 .popup_inner input.submit {
 	border-top: none;
 }
+.boxes-wrapper {
+	width: 900px;
+	margin: auto;
+	text-align:center;
+	margin-bottom: 200px;
+}
+.sometitle {
+	text-align:center;
+	font-weight:300;
+	font-size:42px;
+	margin-top: 180px;
+	margin-bottom:65px;
+}
+.box {
+	width: 250px;
+	margin: 10px;
+	display: inline-block;
+}
+.box p {
+	font-size: 18px;
+	line-height:25px;
+}
 /* LeftNav */
 .container {
 	max-width: 900px;
@@ -270,11 +292,40 @@ input.center-input {
 	padding: 0px 2.5% 0px 2.5%;
 
 }
+.home-right{
+	left: 42%;
+	top: 20%;
+	position: absolute;
+	display: inline-block;
+}
+.macbook {
+	background: url( images/macbook.png) no-repeat center center;
+ 	-webkit-background-size: cover;
+   	-moz-background-size: cover;
+  	-o-background-size: cover;
+
+  	height: 438px;
+  	width: 765px;
+
+	text-align:center;
+}
+.macbook img {
+	margin-top: 28px;
+	margin-left: -9px;
+}
+.home-left {
+	margin: 50px 0 140px 0;
+	/*left: 50%;*/
+	width: 400px;
+	display: inline-block;
+	z-index: 200;
+}
 .home-inner {
 	margin-top: 20%;
 }
 .header {
 	font-size: 56px;
+	font-weight: 300;
 }
 /* Profile */
 .inline {
@@ -342,6 +393,9 @@ ul.ul-nav li{
 ul.ul-nav li:hover{
 	border-bottom: 3px solid #3d91ff;
 	color: #3d91ff;
+}
+.right {
+	float:right;
 }
 
 /* Footer */
