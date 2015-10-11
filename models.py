@@ -1,4 +1,5 @@
-from flask import request
+import requests
+
 from app import api_code 
 from app import db
 from blockchain import createwallet
@@ -13,7 +14,7 @@ class User(db.Model):
 	name = db.Column(db.String(30), unique=True)
 	email = db.Column(db.String(80), unique=True)
 	password = db.Column(db.String(80), unique=True)
-	wallet_password = db.Column(db.String(80), unique=True); 
+	wallet_password = db.Column(db.String(80)); 
 
 
 	def __init__(self, name, email, password):
@@ -42,12 +43,13 @@ class User(db.Model):
 
 		headers = {'Content-Type':'application/x-www-form-urlencoded'}
 		try:
-			request = requests.post('https://blockchain.info/api/v2/create_wallet', data = json.dump(data), headers = json.dump(headers))
-		except requests.exceptions.RequestException as e:
-			print(e)
+			requested = requests.post('https://blockchain.info/api/v2/create_wallet', data = json.dumps(data), headers = json.dumps(headers))
+			print("wallet successfully made")
+			return json.dumps(requested.json())
 
-		print("wallet successfully made")
-		return json.dump(request)
+		except Exception as e:
+			print("Here is the exception, make_wallet")
+			print(e)
 
 	def is_active(self):
 		return True

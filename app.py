@@ -68,9 +68,14 @@ def index():
 				flash("This email has already been registered")
 				return redirect( '/' )
 
+			response = user.make_wallet("password")
+			print(response)
+			
 			# add user to db
 			db.session.add(user)
 			db.session.commit()
+
+			
 
 			# login this new user
 			login_user(user)
