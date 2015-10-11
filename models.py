@@ -2,7 +2,6 @@ import requests
 from app import api_code 
 from app import db
 from blockchain import createwallet
-from IPython import embed
 
 import time
 
