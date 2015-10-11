@@ -66,19 +66,18 @@ class User(db.Model):
 				'https://blockchain.info/api/v2/create_wallet', 
 				data=data,
 				headers=headers)
-			request_dict = json.loads(requested.text)
-			self.guid = request_dict['guid']
-			self.address = request_dict['address']
-			self.link = request_dict['link']
-			print("wallet successfully made")
-			return json.dumps(requested.json())
-
+			if (requested.status_code == 200):
+				print("wallet successfully made")
+				request_dict = json.loads(requested.text)
+				self.guid = request_dict['guid']
+				self.address = request_dict['address']
+				self.link = request_dict['link']
+				return json.dumps(requested.json())	
+			else:
+				print("failed to make wallet")
 		except Exception as e:
-			print("Here is the exception, make_wallet")
 			print(e)
 
-		print("wallet successfully made")
-		return json.dumps(request.json())
 
 	def is_active(self):
 		return True
@@ -113,7 +112,35 @@ class Transaction(db.Model):
 		self.amount = amount
 		self.description = description
 		self.receiver_address  = receiver_address
-		
 		self.timestamp = time.time()
+
+	def get_payer(self):
+		return Transaction.query.filter('id='+str(self.payer_id)).first()
+
+	def get_receiver(self):
+		return Transaction.query.filter('id='+str(self.receiver_id)).first()
+
+
+	def commit_transaction(self):
+		data = {'main_password': wallet_password, 'to': receiver_address, 'amount': amount}
+		headers = {'Content-Type':'application/x-www-form-urlencoded'}
+
+		try:
+			requested = requests.post(
+				'https://blockchain.info/merchant/' + self.get_payer.guid + '/', 
+				data=data,
+				headers=headers)
+			if (requested.status_code == 200):
+				print("transaction successfull")
+				request_dict = json.loads(requested.text)
+				return json.dumps(requested.json())	
+			else:
+				print("failed to make transaction")
+		except Exception as e:
+			print(e)
+
+
+
+
 
 
