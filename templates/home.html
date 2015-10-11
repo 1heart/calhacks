@@ -53,9 +53,22 @@
 				</div>
 				<div class="transaction-right">
 					<a class="likable" href="/like"><i class="fa fa-heart"></i></a>
-					{% if transaction.likes %}<p class="likes">{{ transaction.likes }}</p>{% endif %}
+					{% if transaction.likes %}
+						<p class="likes">{{ transaction.likes }}</p>
+					{% else %}
+						<p class="likes">00</p>
+					{% endif %}
 
-					<p class="timestamp">{{ transaction.timestamp }}</p>
+					<p class="timestamp" name="timestamp" data-time="{{ transaction.timestamp }}">{{ transaction.timestamp }}</p>
+
+					<p class="timestamp">asdf</p>
+
+
+					<script>
+						var day = $( ".timestamp" ).attr( "data-time" );
+						console.log( day );
+						console.log( "wow" );
+					</script>
 				</div>
 			</li>
 		</a>

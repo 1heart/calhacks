@@ -117,7 +117,9 @@ def index():
 
 @app.route('/profile')
 def profile():
-	return render_template( 'profile.html')
+	return render_template( 'profile.html',
+							title="Profile",
+							current_user=current_user)
 
 @app.route('/charge')
 def charge():
@@ -130,7 +132,9 @@ def pay():
 
 @app.route('/settings')
 def settings():
-	return render_template( 'settings.html')
+	return render_template( 'settings.html',
+							title="Settings",
+							current_user=current_user)
 
 @app.route('/home', methods=["GET", "POST"])
 @login_required

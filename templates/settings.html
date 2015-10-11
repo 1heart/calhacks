@@ -1,4 +1,35 @@
 {% extends 'leftnav.html' %}
 
 {% block inner_content %}
+<div style="text-align:left">
+	<div class="inline">
+		<h1>{{ current_user.name }}<span class="subheader">Settings</span></h1>
+	</div>
+	<div class="inline-right">
+		<i class="fa fa-heart inline"></i>
+		{% if current_user.likes %}
+			<p>{{ current_user.likes }}</p>
+		{% else %}
+			<div class="center"><p>00</p></div>
+		{% endif %}
+	</div>
+
+
+	<div class="profilebar">
+		<p>Name: {{ current_user.name }}</p>
+	</div>
+
+	<div class="profilebar">
+		<p>Email: {{ current_user.email }}</p>
+	</div>
+	<div class="profilebar">
+		<p>GuID: {{ current_user.guid }}</p>
+	</div>
+	<div class="profilebar">
+		<p>Link: {{ current_user.link }}</p>
+	</div>
+	<div class="profilebar">
+		<p>Address: {{ current_user.address }}</p>
+	</div>
+</div>
 {% endblock %}
