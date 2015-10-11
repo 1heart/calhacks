@@ -115,6 +115,18 @@ def index():
 							login_form=login_form,
 							current_user=current_user)
 
+@app.route('/profile')
+def profile():
+	return render_template( 'profile.html')
+
+@app.route('/pay')
+def pay():
+	return render_template( 'pay.html')
+
+
+@app.route('/settings')
+def settings():
+	return render_template( 'settings.html')
 
 @app.route('/home', methods=["GET", "POST"])
 @login_required
