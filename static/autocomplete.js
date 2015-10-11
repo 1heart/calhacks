@@ -1,3 +1,5 @@
+var dummy  = ['1heart', 'cosmicac', 'vincent']
+
 var autocomplete = function(listOfNames, currString) {
 	var resultArray = [];
 	for (i = 0; i < listOfNames.length; i++) {
@@ -7,6 +9,8 @@ var autocomplete = function(listOfNames, currString) {
 	}
 	return resultArray;
 }
+
+
 
 
 
