@@ -27,7 +27,7 @@ var AutoCompleteSelect = React.createClass({displayName: 'AutoCompleteSelect',
             	libraries[i] = <li className="dropdown-box" onClick={this.handleClick}>{libraries[i]}</li>
             }
 
-	        return 	<div className="input-search-wrapper">
+	        return 	<div><h1>Pay</h1><div className="input-search-wrapper"><h1>Pay</h1>
 				        <input type="text" className="input-search"value={this.state.searchString} onChange={this.handleChange} placeholder="Search here for recipient ID"/>
 				        <ul> 
 				        	{libraries}
@@ -35,12 +35,13 @@ var AutoCompleteSelect = React.createClass({displayName: 'AutoCompleteSelect',
 				        </ul>
 			        <PayForm currUser={this.state.currUser}/>
 
-			        </div>
+			        </div></div>
 			        ;
         }
 
-        return 	<div className="input-search-wrapper" >
+        return 	<div><h1>Pay</h1><div className="input-search-wrapper" >
 			        <input type="text" className="input-search" value={this.state.searchString} onChange={this.handleChange} placeholder="Search here for recipient ID"/>
+			   	</div>
 			    <PayForm />
 		        </div>
 		        ;
@@ -52,8 +53,12 @@ var PayForm = React.createClass({ displayName: 'PayForm',
 	render: function() {
 		return (
 			<form className="payForm">
-				Pay <input  style={{'display': 'inline'}} type="number" /> BTC to { this.props.currUser || 'a friend'} <input  style={{'display': 'inline'}} type="hidden" value={this.props.currUser} /> for 
-				<input style={{'display': 'inline'}} type="text" />
+				<div className="input-search-wrapper">
+					<input className="input-search" type="number"  placeholder="Payment Amount"/><input  style={{'display': 'inline'}} type="hidden" value={this.props.currUser}/> 
+				</div>
+				<div className="input-search-wrapper">
+					<input className="input-search" type="text" placeholder="Description"/>
+				</div>
 			</form>
 			);
 	}
