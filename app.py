@@ -56,6 +56,10 @@ def index():
 		# registration
 		if register_form.validate_on_submit():
 
+			if len(register_form.password.data) < 10:
+				flash('Password is not long enough')
+				return redirect('/')
+
 			print('register_form validated')
 
 			# create a new user object
