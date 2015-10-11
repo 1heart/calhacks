@@ -20,20 +20,19 @@ class User(db.Model):
 	address = db.Column(db.String(80)) 
 
 
+	aliases = db.relationship('Alias', 
+						backref = 'user', 
+						lazy='dynamic')
+
 	payment_transactions = db.relationship('Transaction',
 								backref='payer',
                                 lazy='dynamic')
-                                # foreign_keys='User.id')
 
-	# receiving_transactions = db.relationship('Transaction',
-	# 							backref='receiver',
- #                                lazy='dynamic')
-                                # foreign_keys='User.id')
 	def receiving_transactions(self):
 		return Transaction.query.filter('receiver_id=' + str(self.id)).all()
 
 	def payment_transactions(self):
-			return Transaction.query.filter('payment_id=' + str(self.id)).all()
+		return Transaction.query.filter('payment_id=' + str(self.id)).all()
 
 	def __init__(self, name, password, email):
 
@@ -140,6 +139,16 @@ class Transaction(db.Model):
 
 
 
+class Alias(db.Model): 
+	id = db.Column(db.Integer, primary_key=True) 
+	alias_string = db.Column(db.String(80), unique=True) 
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	points = db.Column(db.Integer)
+
+	def __init__(self, alias_string, user):
+		self.alias_string = alias_string
+		user_id = user.id
+		talent = 0
 
 
 
