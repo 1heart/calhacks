@@ -113,10 +113,10 @@ class Transaction(db.Model):
 		self.timestamp = time.time()
 
 	def get_payer(self):
-		return Transaction.query.filter('id='+str(self.payer_id)).first()
+		return User.query.filter('id='+str(self.payer_id)).first()
 
 	def get_receiver(self):
-		return Transaction.query.filter('id='+str(self.receiver_id)).first()
+		return User.query.filter('id='+str(self.receiver_id)).first()
 
 
 	def commit_transaction(self):
@@ -137,18 +137,19 @@ class Transaction(db.Model):
 		except Exception as e:
 			print(e)
 
-
-
 class Alias(db.Model): 
 	id = db.Column(db.Integer, primary_key=True) 
 	alias_string = db.Column(db.String(80), unique=True) 
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	points = db.Column(db.Integer)
 
+	def get_user(self):
+		return User.query.filter('id='+str(self.user_id)).first()
+
 	def __init__(self, alias_string, user):
 		self.alias_string = alias_string
 		user_id = user.id
 		talent = 0
-
+		self.get_user().aliases.append(self)
 
 
