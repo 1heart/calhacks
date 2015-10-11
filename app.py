@@ -158,6 +158,9 @@ def vote():
 				return 'nah'
 			else:
 				transactionUserDict[transactionId].append(current_user)
+				currTransaction = Transaction.query.filter_by(id=int(transactionId)).first()
+				currTransaction.likes += 1
+				db.session.commit()
 				return 'lol nice'
 
 
