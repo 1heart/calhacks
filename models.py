@@ -120,12 +120,12 @@ class Transaction(db.Model):
 
 
 	def commit_transaction(self):
-		data = {'main_password': wallet_password, 'to': receiver_address, 'amount': amount}
+		data = {'password': self.get_payer().wallet_password, 'to': self.receiver_address, 'amount': self.amount, 'api_code':api_code}
 		headers = {'Content-Type':'application/x-www-form-urlencoded'}
 
 		try:
 			requested = requests.post(
-				'https://blockchain.info/merchant/' + self.get_payer.guid + '/', 
+				'https://blockchain.info/merchant/' + self.get_payer().guid + '/payment', 
 				data=data,
 				headers=headers)
 			if (requested.status_code == 200):
