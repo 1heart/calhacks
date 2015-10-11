@@ -48,11 +48,11 @@
 		<a href="/transaction">
 			<li class="transaction">
 				<div class="transaction-left">
-					<h2>{{ transaction.payer_id }} just paid {{ transaction.receiver_id }} a monstrous {{ transaction.amount }} BTC.</h2>
+					<h2>{{ transaction.payer_id }} just paid {{ transaction.receiver_id }} a monstrous {{ transaction.btc }} BTC.</h2>
 					<p>{{ transaction.description }}</p>
 				</div>
 				<div class="transaction-right">
-					<a class="likable" href="/like"><i class="fa fa-heart"></i></a>
+					<a class="likable"><i class="fa fa-heart"></i></a>
 					{% if transaction.likes %}<p class="likes">{{ transaction.likes }}</p>{% endif %}
 
 					<p class="timestamp">{{ transaction.time }}</p>

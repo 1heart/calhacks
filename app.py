@@ -165,6 +165,7 @@ def home():
 	transaction_list = Transaction.query.all()
 	for x in transaction_list:
 		currDate = datetime.datetime.fromtimestamp(x.timestamp).strftime('%Y/%m/%d, %H:%M:%S')
+		x.btc = x.amount // 400000.0
 		x.time = currDate
 	print(transaction_list)
 
