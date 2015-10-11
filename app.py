@@ -123,8 +123,24 @@ def profile():
 def charge():
 	return render_template( 'charge.html')
 
-@app.route('/pay')
+@app.route('/pay', methods=['GET', 'POST'])
 def pay():
+	if request.method == 'POST':
+		recipientId = request.form['recipientId']
+		amount = request.form['amount']
+		description = request.form['description']
+		# transaction = Transaction()
+		payer = current_user
+		receiver = Alias.query.filter_by(alias_string=recipientId).first().user
+		transaction = Transaction(payer, receiver, amount, description, receiver.address)
+		try:
+			db.session.add(transaction)
+			db.session.commit()
+			transaction.commit_transaction()
+			return 'lol nice'
+		except Exception as e:
+			print(e)
+			return 'transaction failed'
 	return render_template( 'pay.html')
 
 

@@ -54,14 +54,38 @@ var AutoCompleteSelect = React.createClass({displayName: 'AutoCompleteSelect',
 });
 
 var PayForm = React.createClass({ displayName: 'PayForm',
+	handleSubmit: function(e) {
+		e.preventDefault();
+		var recipientId = this.refs.recipientId.value.trim();
+		var amount = this.refs.amount.value.trim();
+		var description = this.refs.description.value.trim();
+		var data = {
+			'recipientId': recipientId,
+			'amount': amount,
+			'description': description
+		};
+		console.log(data);
+		$.post('/pay', data, function(response) {
+			if (response === 'lol nice') {
+				console.log('nice job')
+				window.location.replace("/profile");
+			}
+		}).error(function(e) {
+			$('#errorMessage').html("<div><h2>There's a problem with the transaction. Please try again</h2></div>");
+		});
+	},
 	render: function() {
 		return (
-			<form className="payForm">
+			<form className="payForm" onSubmit={this.handleSubmit}>
 				<div className="input-search-wrapper">
-					<input className="input-search" type="number"  placeholder="Payment Amount"/><input  style={{'display': 'inline'}} type="hidden" value={this.props.currUser}/> 
+					<input ref="amount" className="input-search" type="number"  placeholder="Payment Amount"/>
+					<input ref="recipientId" style={{'display': 'inline'}} type="hidden" value={this.props.currUser}/> 
 				</div>
 				<div className="input-search-wrapper">
-					<input className="input-search" type="text" placeholder="Description"/>
+					<input ref="description" className="input-search" type="text" placeholder="Description"/>
+				</div>
+				<div className="input-search-wrapper">
+					<input className="input-search" type="submit" value="Post" />
 				</div>
 			</form>
 			);
