@@ -16,6 +16,7 @@ class User(db.Model):
 	password = db.Column(db.String(80))
 	wallet_password = db.Column(db.String(80))
 	guid = db.Column(db.String(80)) 
+	email = db.Column(db.String(80)) 
 	link = db.Column(db.String(80)) 
 	address = db.Column(db.String(80)) 
 
@@ -32,12 +33,11 @@ class User(db.Model):
 	def receiving_transactions(self):
 		return Transaction.query.filter('receiver_id=' + str(self.id)).all()
 
-	def __init__(self, name, email, password):
+	def __init__(self, name, password, email):
 
 		print( "Generating user" )
-
-		self.name = name
 		self.email = email
+		self.name = name
 		self.password = password
 
 	def is_authenticated(self):
@@ -100,6 +100,8 @@ class Transaction(db.Model):
 	
 	receiver_address = db.Column(db.String(240))
 	description = db.Column(db.String(240)) 
+
+	likes = db.Column(db.Integer)
 
 
 	def __init__(self, payerUser, receiverUser, amount, description, receiver_address):

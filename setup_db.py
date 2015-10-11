@@ -1,16 +1,20 @@
 db.drop_all()
 db.create_all()
 
-user1 = User('yixin', 'yixin1996@gmail.com', 'hellohello123')
-user2 = User('tom', 'weirdotomli@gmail.com', 'hellohello123')
-transaction = Transaction()
+user1 = User('yixin', 'hellohello123', 'someemail1@gmail.com')
+user2 = User('tom', 'hellohello123', 'someemail2@gmail.com')
 
-user1.payment_transactions.append(transaction)
-# user2.receiving_transactions.append(transaction)
 
 db.session.add(user1)
 db.session.add(user2)
+
+db.session.commit()
+
 db.session.add(transaction)
+
+transaction = Transaction(user1, user2, 10, 'lol nice transaction', 'asdfasdf')
+
+user1.payment_transactions.append(transaction)
 
 db.session.commit()
 
