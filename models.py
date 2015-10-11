@@ -28,10 +28,10 @@ class User(db.Model):
 								backref='payer',
                                 lazy='dynamic')
 
-	def receiving_transactions(self):
+	def get_receiving_transactions(self):
 		return Transaction.query.filter('receiver_id=' + str(self.id)).all()
 
-	def payment_transactions(self):
+	def get_payment_transactions(self):
 		return Transaction.query.filter('payment_id=' + str(self.id)).all()
 
 	def __init__(self, name, password, email):

@@ -10,9 +10,11 @@ db.session.add(user2)
 
 db.session.commit()
 
+transaction = Transaction(user1, user2, 10, 'lol nice transaction', 'asdfasdf')
+
+
 db.session.add(transaction)
 
-transaction = Transaction(user1, user2, 10, 'lol nice transaction', 'asdfasdf')
 
 user1.payment_transactions.append(transaction)
 
