@@ -24,11 +24,11 @@ var AutoCompleteSelect = React.createClass({displayName: 'AutoCompleteSelect',
             	return l.toLowerCase().match( searchString );
             });
             for (var i=0; i<libraries.length; i++) {
-            	libraries[i] = <li onClick={this.handleClick}>{libraries[i]}</li>
+            	libraries[i] = <li className="dropdown-box" onClick={this.handleClick}>{libraries[i]}</li>
             }
 
-	        return 	<div>
-				        <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search here for recipient ID" />
+	        return 	<div className="input-search-wrapper">
+				        <input type="text" className="input-search"value={this.state.searchString} onChange={this.handleChange} placeholder="Search here for recipient ID"/>
 				        <ul> 
 				        	{libraries}
 
@@ -39,8 +39,8 @@ var AutoCompleteSelect = React.createClass({displayName: 'AutoCompleteSelect',
 			        ;
         }
 
-        return 	<div>
-			        <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search here for recipient ID" />
+        return 	<div className="input-search-wrapper" >
+			        <input type="text" className="input-search" value={this.state.searchString} onChange={this.handleChange} placeholder="Search here for recipient ID"/>
 			    <PayForm />
 		        </div>
 		        ;
