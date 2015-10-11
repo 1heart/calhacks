@@ -1,7 +1,72 @@
 {% extends 'leftnav.html' %}
 
 {% block inner_content %}
-<div class="content">
+<div>
 	<h1>Hi, {{ current_user.name }}</h1>
 </div>
+
+<div>
+	<ul>
+		<li class="transaction">
+			<a href="/transaction">
+				<div class="transaction-left">
+					<h2>JOHN_CENA paid hamberguer_insane_arsloch 10.424 BTC</h2>
+					<p>What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I’m the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we spea</p>
+				</div>
+			</a>
+			<div class="transaction-right">
+				<a class="likable" href="/like"><i class="fa fa-heart"></i></a>
+				<p class="likes">36</p>
+			</div>
+			<div class="transaction-right-bottom">
+				<p class="timestamp">4:20 PM</p>
+			</div>
+		</li>
+
+		<li class="transaction">
+			<a href="/transaction">
+				<div class="transaction-left">
+					<h2>JOHN_CENA paid hamberguer_insane_arsloch 10.424 BTC</h2>
+					<p>What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I’m the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we spea</p>
+				</div>
+			</a>
+			<div class="transaction-right">
+				<a class="likable" href="/like"><i class="fa fa-heart"></i></a>
+				<p class="likes">36</p>
+			</div>
+			<div class="transaction-right-bottom">
+				<p class="timestamp">4:20 PM</p>
+			</div>
+		</li>
+	</ul>
+</div>
+
+{% if transaction_list %}
+<div>
+	<ul>
+	{% for transaction in transaction_list %}
+		<a href="/transaction">
+			<li class="transaction">
+				<div class="transaction-left">
+					<h2>{{ transaction.payer_id }} just paid {{ transaction.receiver_id }} a monstrous {{ transaction.amount }} BTC.</h2>
+					<p>{{ transaction.description }}</p>
+				</div>
+				<div class="transaction-right">
+					<a class="likable" href="/like"><i class="fa fa-heart"></i></a>
+					<p class="likes">{{ transaction.likes }}</p>
+
+					<p class="timestamp">{{ transaction.timestamp }}</p>
+				</div>
+			</li>
+		</a>
+	{% endfor %}
+	</ul>
+</div>
+{% endif %}
+
+{% if not transaction_list %}
+<div class="noticebar">
+	<p>No more feed to show right now. Check back later for updates!</p>
+</div>
+{% endif %}
 {% endblock %}

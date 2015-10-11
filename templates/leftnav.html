@@ -6,15 +6,18 @@
 <div class="leftnav">
 	
 	<ul>
-		<a href="/profile"><li class="profile">Profile</li></a>
-		<a href="/pay"><li>Make Payment</li></a>
-		<a href="/charge"><li>Charge</li></a>
-		<a href="/profile"><li>Visualize</li></a>
+		<a href="/home"><li class="home">Home</li></a>
+		<a href="/profile"><li class="profile">View Profile</li></a>
+		<a href="/pay"><li>Make Payment<i class="fa fa-btc"></i></li></a>
+		<a href="/charge"><li>Charge<i class="fa fa-btc"></i></li></a>
 		<a href="/profile"><li>Settings</li></a>
 	</ul>
 </div>
 
-{% block inner_content %}{% endblock %}
+
+<div class="content">
+	{% block inner_content %}{% endblock %}
+</div>
 
 </div>
 {% endblock %}
