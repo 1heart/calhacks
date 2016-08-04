@@ -1,8 +1,8 @@
 db.drop_all()
 db.create_all()
 
-user1 = User('yixin', 'hellohello123', 'yixin1996@gmail.com')
-user2 = User('tom', 'hellohello123', 'weirdotomli@gmail.com')
+user1 = User('yixin', 'hellohello123', 'asdf@gmail.com')
+user2 = User('tom', 'hellohello123', 'fdsa@gmail.com')
 
 
 db.session.add(user1)
